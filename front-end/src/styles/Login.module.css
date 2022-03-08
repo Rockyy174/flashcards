@@ -1,0 +1,29 @@
+
+.form {
+    width: 99%;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+}
+
+.form input {
+    padding: 8px;
+    border: var(--border);
+    border-radius: var(--border-radius-little);
+}
+
+::placeholder {
+    color: rgba(0, 0, 0, .4);
+  }
+
+.wrong_input {
+    border: 1px solid red !important; 
+}
+
+.error_message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: -10px;
+}

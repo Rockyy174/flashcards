@@ -1,0 +1,265 @@
+
+.deck_item {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 2rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    background-color: var(--bg-color-2);
+    cursor: pointer;
+}
+
+/* BIG ADD BUTTON */
+.add_btn {
+    position: fixed;
+    bottom: 5vh;
+    right: 9%;
+
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    padding: 1.2rem;
+    background-color: var(--blue-dark);
+    cursor: pointer;
+}
+
+/* CLOSE FORM BUTTON */
+.close_form_btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    display: grid;
+    place-items: center;
+    background-color: var(--close-btn);
+    color: #ffffff;
+    border-radius: var(--border-radius-little);
+    cursor: pointer;
+}
+
+.close_form_btn img {
+    width: 20px;
+}
+
+/* ADD FLASHCARDS AND DECKS OPTIONS */
+.options_container {
+    position: fixed;
+    bottom: calc(5vh + 4rem);
+    right: 10%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.options_container span {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: .5rem;
+    cursor: pointer;
+    background-color: white;
+}
+
+.options_container span img {
+    padding: .3rem;
+    border-radius: 50%;
+    background-color: var(--blue-dark);
+}
+
+.no_deck_message {
+    position: absolute;
+    top: -5px;
+    right: 15px;
+
+    display: block;
+    min-width: 310px;
+    padding: .3rem .5rem;
+    background-color: rgba(30, 30, 30, 0.8);
+    color: white;
+    border-radius: var(--border-radius);
+    opacity: 1;
+    transition: .3s;
+}
+
+/* ADD FORM */
+.form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 50%;
+    padding: 1rem;
+    padding-bottom: 4rem;
+    border-radius: .4rem;
+    background-color: white;
+}
+
+.form div input,
+.deck_options {
+    width: 100%;
+    padding: 5px 10px;
+    background: none;
+    border: var(--border);
+    border-radius: 3px;
+}
+
+.wrong_input {
+    border: 1px solid red !important; 
+}
+
+.deck_options {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -15px;
+    padding: 7px 10px;
+    cursor: pointer;
+}
+
+.arrow_dropdown {
+    width: 20px;
+}
+
+.dropdown_options {
+    position: absolute;
+    top: 35px;
+    left: -1px;
+
+    width: calc(100% + 2px);
+    padding-top: 7px 10px;
+    background-color: white;
+    border: var(--border);
+    border-top: none;
+    border-radius: 0px 0px 3px 3px;
+    z-index: 3;
+}
+
+.dropdown_options p {
+    padding: 7px 10px;
+    border-top: var(--border-light);
+}
+.dropdown_options p:hover {
+    background-color: rgba(220, 220, 220, 0.2);
+}
+
+.btn_container {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+    width: 100%;
+}
+
+/* Flashcard success message */
+.success_message_container,
+.success_message_container_active {
+    position: absolute;
+    bottom: 5vh;
+
+    display: grid;
+    place-items: center;
+    width: 100%;
+    opacity: 0;
+    transition: .3s ease-in-out;
+}
+
+.success_message_container_active {
+    opacity: 1;
+}
+
+.success_message_container p,
+.success_message_container_active p {
+    background-color: var(--blue-dark);
+    color: white;
+    padding: .8rem 1.5rem;
+    border-radius: var(--border-radius-little);
+}
+
+/* Confirm delete */
+
+.popup_content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    background-color: white;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius);
+  }
+
+/* WARNINS */
+.error_message {
+    color: red;
+    font-size: 14px;
+    margin-top: -12px;
+}
+
+@media (max-width: 750px) {
+    /* ADD FORM */
+    .form {
+        width: 65%;
+    }
+}
+
+@media (max-width: 500px) {
+    .deck_item {
+        margin: 1rem .5rem;
+        padding: 1rem .5rem;
+    }
+
+    /* BIG ADD BUTTON */
+    .add_btn {
+        bottom: 4vh;
+        right: 5%;
+
+        padding: .9rem;
+    }
+
+    .options_container {
+        bottom: calc(4vh + 3rem);
+        right: 7%;
+    
+        gap: .5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .options_container span img {
+        width: 30px;
+    }
+
+    /* ADD FORM */
+    .form {
+        gap: .5rem;
+        width: 100%;
+        max-width: 400px;
+        margin: 0px 1rem;
+        padding-bottom: 3.5rem;
+    }
+
+    .deck_options {
+        padding: 5px 8px;
+        margin-top: -5px;
+    }
+
+    .arrow_dropdown {
+        width: 15px;
+    }
+    
+    .dropdown_options {
+        top: 28px;
+    }
+
+    /* CLOSE FORM BUTTON */
+    .close_form_btn img {
+        width: 15px;
+    }
+  }

@@ -1,0 +1,152 @@
+.deck_title_container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--bg-color-2);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+
+.deck_title {
+    margin-left: 80px;
+}
+
+.front_back_container {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 500px;
+    max-height: 30vh;
+}
+.front_back_container p {
+    font-size: 4rem;
+    text-align: center;
+}
+
+.border {
+    width: 100%;
+    border-bottom: var(--border-light);
+}
+
+.back_arrow {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: 80px;
+    border-right: var(--border-light);
+    transition: .3s;
+    cursor: pointer;
+}
+.back_arrow:hover {
+    background-color: rgba(0, 0, 0, .025);
+    border-top-left-radius: var(--border-radius);
+}
+
+.back_arrow img {
+    width: 30px;
+}
+
+.update_delete_container {
+    position: absolute;
+    bottom: -2.5rem;
+    right: 1.9rem;
+
+    display: flex;
+    gap: .5rem;
+}
+
+.update_delete_container img {
+    cursor: pointer;
+    opacity: .7;
+    transition: .2s;
+}
+.update_delete_container img:hover {
+    opacity: 1;
+}
+ 
+.show_answer_btn {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+
+.vertical_line {
+    border-right: var(--border-light);
+    height: 80%;
+    padding-right: 1rem;
+}
+
+@media (max-width: 500px) {
+    .deck_title_container {
+        justify-content: space-between;
+        padding: .5rem;
+    }
+
+    .deck_title {
+        margin-left: 60px;
+    }
+
+    .back_arrow {
+        width: 55px;
+    }
+
+    .back_arrow img {
+        width: 25px;
+    }
+
+    .cards_amound {
+        position: absolute;
+        bottom: -23px;
+        left: 0px;
+
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem !important;
+        width: 100%;
+        padding: 0px .5rem;
+        border-bottom: var(--border-light);
+    }
+    
+    .cards_amound p {
+        font-size: .9rem;
+        padding: 3px 0px;
+    }
+
+    .vertical_line {
+        height: 100%;
+        padding-right: 1rem !important;
+    }
+
+    .update_delete_container {
+        bottom: -3.2rem;
+        right: .4rem;
+    
+        gap: .4rem;
+    }
+
+    .update_delete_container img {
+        width: 20px;
+    }
+
+    .front_back_container p {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .front_back_container p {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 280px) {
+    .front_back_container p {
+        font-size: 2rem;
+    }
+}
