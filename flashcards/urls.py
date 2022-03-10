@@ -13,5 +13,6 @@ urlpatterns = [
     path('edit-flashcard/', FlashcardApi.as_view({'put': 'edit'}), name="edit-card"),
     path('delete-flashcard/<int:pk>/', FlashcardApi.as_view({'delete': 'delete'}), name="delete-card"),
     
+    path('test/', Test.as_view(), name="test"),
     # path('test/<int:pk>/', Test.as_view({'get': 'list'}), name="test"),
 ]

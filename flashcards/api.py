@@ -136,12 +136,12 @@ class FlashcardApi(viewsets.ViewSet):
         
 
 
-# class Test(generics.ListCreateAPIView):
-#     queryset = Card.objects.all()
-#     serializer_class = DeckSerializer
-#     permission_classes = [AllowAny]
+class Test(generics.ListCreateAPIView):
+    queryset = Card.objects.all()
+    serializer_class = DeckSerializer
+    permission_classes = [AllowAny]
 
-#     def list(self, request):
-#         queryset = Deck.objects.all()
-#         serializer = DeckSerializer(queryset, many=True)
-#         return Response(serializer.data)
+    def list(self, request):
+        queryset = Deck.objects.all()
+        serializer = DeckSerializer(queryset, many=True)
+        return Response(serializer.data)

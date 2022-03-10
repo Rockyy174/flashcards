@@ -132,10 +132,18 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+        'NAME': 'flashcards', 
+        'HOST': os.environ.get('FLASHCARD_DB_ENDPOINT'), #endpoint
+        'PORT': '3306',
+        'USER': os.environ.get('FLASHCARD_DB_USER'),
+        'PASSWORD': os.environ.get('FLASHCARD_DB_PASSWORD'),
     }
 }
+
 
 
 # Password validation
