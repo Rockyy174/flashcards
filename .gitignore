@@ -7,8 +7,9 @@ db.sqlite3
 media
 */migrations
 
-README.md
 
 # React
-front-end
 front-end/node_modules
+front-end/build
+
+README.md
