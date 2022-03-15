@@ -11,8 +11,15 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
+import json
 from pathlib import Path
 from datetime import timedelta
+
+
+with open('/etc/flashcards_config.json') as config_file:
+    config = json.load(config_file)
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +29,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('CS50_FLASHCARDS_DJANGO_KEY')
+SECRET_KEY = config.get('CS50_FLASHCARDS_DJANGO_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURIfTY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["3.70.239.110", "127.0.0.1"]
+ALLOWED_HOSTS = []
+
+if not DEBUG:
+    ALLOWED_HOSTS += [
+        '3.70.239.110',
+        'cards.mightylanguages.com',
+    ]
 
 
 # Application definition
@@ -100,7 +113,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+CORS_ALLOWED_ORIGINS = []
 
 if DEBUG:
     CORS_ALLOWED_ORIGINS += [
@@ -138,11 +151,10 @@ DATABASES = {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
         'NAME': 'flashcards', 
-        'HOST': os.environ.get('FLASHCARD_DB_ENDPOINT'), #endpoint
+        'HOST': config.get('FLASHCARD_DB_ENDPOINT'), #endpoint
         'PORT': '3306',
-        'USER': os.environ.get('FLASHCARD_DB_USER'),
-        # 'PASSWORD': os.environ.get('FLASHCARD_DB_PASSWORD'),
-        'PASSWORD': '-9A-+O9Ro9=th$h9yOd0esPOrU-u2e+ls$o5_9r4',
+        'USER': config.get('FLASHCARD_DB_USER'),
+        'PASSWORD': config.get('FLASHCARD_DB_PASSWORD'),
     }
 }
 
@@ -199,15 +211,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # S3 bucket config
+if not DEBUG:
+    AWS_ACCESS_KEY_ID = config.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = config.get('AWS_STORAGE_BUCKET_NAME')
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_QUERYSTRING_AUTH=False
+    AWS_DEFAULT_ACL = None
 
-AWS_S3_FILE_OVERWRITE = False
-AWS_QUERYSTRING_AUTH=False
-AWS_DEFAULT_ACL = None
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
