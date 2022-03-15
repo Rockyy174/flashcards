@@ -71,15 +71,22 @@
 }
  
 .show_answer_btn {
-    position: absolute;
-    bottom: 20px;
+    position: fixed;
+    bottom: 50px;
     width: 100%;
+    max-width: 1200px;
 }
 
 .vertical_line {
     border-right: var(--border-light);
     height: 80%;
     padding-right: 1rem;
+}
+
+@media (max-width: 800px) {
+    .show_answer_btn {
+        bottom: 30px;
+    } 
 }
 
 @media (max-width: 500px) {
