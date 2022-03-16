@@ -18,6 +18,11 @@ export const FlashcardsProvider = ({children}) => {
     const [showUpdateCard, setShowUpdateCard] = useState(false);
     const [showDeleteCard, setShowDeleteCard] = useState(false);
 
+    //Loading
+    const [deckdLoading, setDeckdLoading] = useState(false);
+    const [singleDeckLoading, setSingleDeckLoading] = useState(false);
+    const [flashcardsLoading, setFlashcardsLoading] = useState(false);
+
     // Data
     const [currentDeck, setCurrentDeck] = useState(null);
     const [currentFlashcard, setCurrentFlashcard] = useState({});
@@ -26,6 +31,7 @@ export const FlashcardsProvider = ({children}) => {
 
 
     const loadDecks = () => {
+        setDeckdLoading(true);
         axiosInstance.get('decks/')
             .then(res => {
                 if(res.status) {
@@ -36,17 +42,20 @@ export const FlashcardsProvider = ({children}) => {
                 } else {
                     setServerError(true);
                 }
+                setDeckdLoading(false);
             })
             .catch(() => {
-                setServerError(true);
+                setDeckdLoading(false);
                 setDecks({
                     loaded: false,
                     data: [],
                 });
+                setServerError(true);
             })
     }
 
     const loadSingleDeck = id => {
+        setSingleDeckLoading(true);
         axiosInstance.get(`deck-detail/${id}/`)
             .then(res => {
                 if(res.status) {
@@ -54,13 +63,16 @@ export const FlashcardsProvider = ({children}) => {
                 } else {
                     setServerError(true);
                 }
+                setSingleDeckLoading(false);
             })
             .catch(() => {
+                setSingleDeckLoading(false);
                 setServerError(true);
             });
     }
 
     const loadFlashcards = id => {
+        setFlashcardsLoading(true);
         axiosInstance.get(`flashcards/${id}/`)
             .then(res => {
                 if(res.status) {
@@ -68,13 +80,20 @@ export const FlashcardsProvider = ({children}) => {
                 } else {
                     setServerError(true);
                 }
+                setFlashcardsLoading(false);
             })
             .catch(() => {
+                setFlashcardsLoading(false);
                 setServerError(true);
             });
     }
 
     const contextData = {
+        // Loading
+        deckdLoading,
+        singleDeckLoading,
+        flashcardsLoading,
+
         // UI
         showOptions, setShowOptions,
         showAddFlashcard, setShowAddFlashcard,

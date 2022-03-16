@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FlashcardsContext } from '../contexts/FlashcardsContext';
 import { GlobalContext } from '../contexts/GlobalContext';
 import css from '../styles/Login.module.css';
 
@@ -14,6 +15,8 @@ const LoginPage = () => {
         setCurrentTab,
     } = useContext(GlobalContext);
 
+    const {setDecks} = useContext(FlashcardsContext);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -23,6 +26,7 @@ const LoginPage = () => {
     useEffect(() => {
         setCurrentTab('login');
         logout(false);
+        setDecks({loaded: false, data:[]});
 
         return () => {
             setPassword('');

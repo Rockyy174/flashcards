@@ -41,6 +41,9 @@ const ReviewPage = () => {
     // Context
     const {setServerError} = useContext(GlobalContext);
     const {
+        // Loading
+        flashcardsLoading,
+
         loadSingleDeck, 
         loadFlashcards, 
         flashcards, 
@@ -128,6 +131,7 @@ const ReviewPage = () => {
     useEffect(() => {
         return () => {
             setCurrentDeck(null);
+            setFlashcards([]);
         }
     }, [])
 
@@ -269,41 +273,42 @@ const ReviewPage = () => {
             <ReviewHeader flashcardsLeft={flashcardsLeft} />
 
             
-            
-            {/* If cards left, show them */}
-            {flashcardsLeft > 0 ? <>
-                <div className={css.front_back_container}>
-                    <p ref={frontTextRef}>{flashcards[currentFlashcard]?.front}</p>
-                </div>
+            {!flashcardsLoading && <>
+                {/* If cards left, show them */}
+                {flashcardsLeft > 0 ? <>
+                    <div className={css.front_back_container}>
+                        <p ref={frontTextRef}>{flashcards[currentFlashcard]?.front}</p>
+                    </div>
 
-                <div className={css.border} />
+                    <div className={css.border} />
 
-                {showAnswer &&
-                <div className={css.front_back_container}>
-                    <p ref={backTextRef}>{flashcards[currentFlashcard]?.back}</p>
+                    {showAnswer &&
+                    <div className={css.front_back_container}>
+                        <p ref={backTextRef}>{flashcards[currentFlashcard]?.back}</p>
+                    </div>}
+                </>:
+                // Else show message
+                <div className={`column-center ${width < 500 && "mt-1"}`}>
+                    <p className="flex-center text-center font-medium mt-2">
+                        {currentDeck && currentDeck.count > 0 ? 
+                        'You have reviewed all the flashcards in this deck. Congratulations!' : 
+                        'There are no flashcards in this deck yet.'}
+                    </p>
+                    <button onClick={() => setShowAddFlashcard(true)} className="btn bg-blue">
+                        {currentDeck && currentDeck.count > 0 ? 
+                        'Add more flashcards' : 
+                        'Add flashcards'}
+                    </button>
                 </div>}
-            </>:
-            // Else show message
-            <div className={`column-center ${width < 500 && "mt-1"}`}>
-                <p className="flex-center text-center font-medium mt-2">
-                    {currentDeck && currentDeck.count > 0 ? 
-                    'You have reviewed all the flashcards in this deck. Congratulations!' : 
-                    'There are no flashcards in this deck yet.'}
-                </p>
-                <button onClick={() => setShowAddFlashcard(true)} className="btn bg-blue">
-                    {currentDeck && currentDeck.count > 0 ? 
-                    'Add more flashcards' : 
-                    'Add flashcards'}
-                </button>
-            </div>}
-            
-            <ReviewButtons 
-                dispatch={dispatch} 
-                updateCard={updateCard} 
-                flashcardsLeft={flashcardsLeft} 
-                timeAmount={timeAmount} 
-                showAnswer={showAnswer}
-            />
+                
+                <ReviewButtons 
+                    dispatch={dispatch} 
+                    updateCard={updateCard} 
+                    flashcardsLeft={flashcardsLeft} 
+                    timeAmount={timeAmount} 
+                    showAnswer={showAnswer}
+                />
+            </>}
         </div>
     )
 }

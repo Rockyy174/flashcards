@@ -11,7 +11,7 @@ import RealoadDecks from '../components/deck/ReloadDecks';
 
 const DecksPage = () => {
     // Context
-    const {decks, loadDecks, showDeleteDeck} = useContext(FlashcardsContext);
+    const {deckdLoading, decks, loadDecks, showDeleteDeck} = useContext(FlashcardsContext);
 
     useEffect(() => {
         loadDecks();
@@ -20,11 +20,13 @@ const DecksPage = () => {
     
     return (
         <div className='page-container'>
-            {decks.loaded && decks.data.length < 1 && <NoDeckYet />}
-            {!decks.loaded && <RealoadDecks realodDecks={loadDecks} />}
-            {decks.data.length > 0 && <DeckList />}
-            <AddButton />
-            {showDeleteDeck && <DeleteDeck />}
+            {!deckdLoading && decks.loaded && <>
+                {decks.loaded && decks.data.length < 1 && <NoDeckYet />}
+                {!decks.loaded && <RealoadDecks realodDecks={loadDecks} />}
+                {decks.data.length > 0 && <DeckList />}
+                <AddButton />
+                {showDeleteDeck && <DeleteDeck />}
+            </>}
         </div>
     )
 }

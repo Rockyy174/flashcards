@@ -17,8 +17,14 @@ class DeckApi(viewsets.ViewSet):
 
     def get(self, request, pk, *args, **kwargs):
         deck = Deck.objects.get(id=pk)
-        serializer = DeckSerializer(deck)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        if deck.owner == request.user:
+            serializer = DeckSerializer(deck)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            data = {
+                'message': 'forbidden'
+            }
+            return Response(data=data, status=status.HTTP_403_FORBIDDEN)
 
     def post(self, request, *args, **kwargs):
         serializer = DeckSerializer(data=request.data)
@@ -136,12 +142,12 @@ class FlashcardApi(viewsets.ViewSet):
         
 
 
-class Test(generics.ListCreateAPIView):
-    queryset = Card.objects.all()
-    serializer_class = DeckSerializer
-    permission_classes = [AllowAny]
+# class Test(generics.ListCreateAPIView):
+#     queryset = Card.objects.all()
+#     serializer_class = DeckSerializer
+#     permission_classes = [AllowAny]
 
-    def list(self, request):
-        queryset = Deck.objects.all()
-        serializer = DeckSerializer(queryset, many=True)
-        return Response(serializer.data)
+#     def list(self, request):
+#         queryset = Deck.objects.all()
+#         serializer = DeckSerializer(queryset, many=True)
+#         return Response(serializer.data)
