@@ -13,7 +13,7 @@ import { GlobalContext } from "../contexts/GlobalContext";
 
 const initialState = {
     showAnswer: false,
-    flashcardsLeft: 0,
+    flashcardsLeft: '',
     totalFlashcards: 0,
     currentFlashcard: 0,
 }
@@ -30,6 +30,11 @@ const revisionReducer = (state, action) => {
             return {
                 ...state,
                 showAnswer: true,
+            };
+        case 'clean-up':
+            return {
+                ...state,
+                flashcardsLeft: '',
             };
     }
 }
@@ -130,8 +135,11 @@ const ReviewPage = () => {
     // Clean up
     useEffect(() => {
         return () => {
-            setCurrentDeck(null);
+            setCurrentDeck({
+                count: '',
+            });
             setFlashcards([]);
+            dispatch({type: 'clean-up'});
         }
     }, [])
 

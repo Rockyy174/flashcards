@@ -1,5 +1,5 @@
 # Flashcards
-#### Video Demo:  <URL HERE>
+#### Video Demo: https://www.youtube.com/watch?v=HGeB1qdZMvI
 #### Live website: https://cards.mightylanguages.com/
 ---
 ## What is Flashcards?

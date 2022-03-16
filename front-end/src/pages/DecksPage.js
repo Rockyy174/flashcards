@@ -20,7 +20,7 @@ const DecksPage = () => {
     
     return (
         <div className='page-container'>
-            {!deckdLoading && decks.loaded && <>
+            {(!deckdLoading || decks.loaded) && <>
                 {decks.loaded && decks.data.length < 1 && <NoDeckYet />}
                 {!decks.loaded && <RealoadDecks realodDecks={loadDecks} />}
                 {decks.data.length > 0 && <DeckList />}

@@ -32,7 +32,7 @@ const DesktopNavbar = () => {
 	return (
 		<nav className={css.navbar}>
 			<div className={css.nav_container}>
-				<Link to='/' className={css.nav_logo}>
+				<Link to={isAuthenticated ? '/' : '/login'} className={css.nav_logo}>
 					Flashcards
 				</Link>
 				<div className={css.links_container}>

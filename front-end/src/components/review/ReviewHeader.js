@@ -9,7 +9,6 @@ import css from '../../styles/Revision.module.css';
 
 const ReviewHeader = ({flashcardsLeft}) => {
     const {
-        singleDeckLoading,
         currentDeck, 
         setShowUpdateCard, 
         setShowDeleteCard
@@ -27,8 +26,8 @@ const ReviewHeader = ({flashcardsLeft}) => {
             </span>
 
             <span className={width > 500 ? "flex-center" : css.cards_amound}>
-                <p className={`font-medium ${css.vertical_line}`}>Cards left: {singleDeckLoading ? '-' : flashcardsLeft}</p>
-                <p className="font-medium">Total: {singleDeckLoading ? '-' : currentDeck.count}</p>
+                <p className={`font-medium ${css.vertical_line}`}>Cards left: {flashcardsLeft}</p>
+                <p className="font-medium">Total: {currentDeck.count}</p>
             </span>
 
             {flashcardsLeft > 0 && 

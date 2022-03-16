@@ -20,7 +20,6 @@ export const FlashcardsProvider = ({children}) => {
 
     //Loading
     const [deckdLoading, setDeckdLoading] = useState(false);
-    const [singleDeckLoading, setSingleDeckLoading] = useState(false);
     const [flashcardsLoading, setFlashcardsLoading] = useState(false);
 
     // Data
@@ -55,7 +54,6 @@ export const FlashcardsProvider = ({children}) => {
     }
 
     const loadSingleDeck = id => {
-        setSingleDeckLoading(true);
         axiosInstance.get(`deck-detail/${id}/`)
             .then(res => {
                 if(res.status) {
@@ -63,10 +61,8 @@ export const FlashcardsProvider = ({children}) => {
                 } else {
                     setServerError(true);
                 }
-                setSingleDeckLoading(false);
             })
             .catch(() => {
-                setSingleDeckLoading(false);
                 setServerError(true);
             });
     }
@@ -91,7 +87,6 @@ export const FlashcardsProvider = ({children}) => {
     const contextData = {
         // Loading
         deckdLoading,
-        singleDeckLoading,
         flashcardsLoading,
 
         // UI
